@@ -62,15 +62,6 @@ app.get("/api/:date_string", function (req, res) {
           utc: result,
         }
   );
-
-  // res.json(
-  //   !Boolean(Number(dateInput))
-  //     ? { error: "Invalid Date" }
-  //     : {
-  //         unix: Number(dateInput),
-  //         utc: new Date(Number(dateInput)).toUTCString(),
-  //       }
-  // );
 });
 
 app.get("/api", function (req, res) {
@@ -82,7 +73,6 @@ app.get("/api", function (req, res) {
 });
 
 // listen for requests :)
-// var listener = app.listen(process.env.PORT, function () {
-var listener = app.listen(3000, function () {
+var listener = app.listen(process.env.PORT, function () {
   console.log("Your app is listening on port " + listener.address().port);
 });
