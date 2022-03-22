@@ -28,23 +28,11 @@ app.get("/api/:date_string", function (req, res) {
   if (dateInput === undefined) {
     res.redirect("/api");
   }
-  if (/[-]{1,}/.test(dateInput)) {
+  if (/[-]{1,}/.test(dateInput) || /[.]{1,}/.test(dateInput)) {
     let result = new Date(dateInput);
-    let unix = result;
     result = result.toUTCString();
-    res.json(
-      result == "Invalid Date"
-        ? { error: result }
-        : {
-            unix: Number(unix),
-            utc: result,
-          }
-    );
+    if (result == "Invalid Date") res.json({ error: result });
   }
-  if (/[.]{1,}/.test(dateInput)) {
-    res.json({ error: "Invalid Date" });
-  }
-  console.log(typeof dateInput);
   if (/^\d+$/.test(dateInput)) {
     res.json({
       unix: Number(dateInput),
